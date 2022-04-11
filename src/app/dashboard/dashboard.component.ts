@@ -7,6 +7,9 @@ import { Component, OnInit } from '@angular/core';
 })
 export class DashboardComponent implements OnInit {
 
+  title = 'Bookshop';
+  currentYear: number = new Date().getFullYear();
+  
   constructor() { }
 
   ngOnInit(): void {

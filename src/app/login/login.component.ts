@@ -7,7 +7,7 @@ import {
   Validators,
 } from '@angular/forms';
 import { AuthServiceService } from '../auth-service.service';
-
+import {Router} from "@angular/router"
 import { ToastrService } from 'ngx-toastr';
 
 
@@ -30,7 +30,8 @@ export class LoginComponent implements OnInit {
   constructor(
     private authSerivce: AuthServiceService,
     private formBuilder: FormBuilder,
-    private toastr: ToastrService
+    private toastr: ToastrService,
+    private router: Router,
   ) {}
   ngOnInit(): void {
     this.initForm();
@@ -74,14 +75,13 @@ export class LoginComponent implements OnInit {
 
       return;
     }
-    console.log(JSON.stringify(this.formGroup.value, null, 2));
-
+    
     this.authSerivce.login(this.formGroup.value).subscribe(
       (res) => {
         let data = res;
         if (data.status === true) {
           console.log(data.data.token);
-          alert(data.message);
+          this.router.navigate(['/dashboard'])
         }
       },
       (error) => {
